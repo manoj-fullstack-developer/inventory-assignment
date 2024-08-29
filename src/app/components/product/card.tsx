@@ -32,26 +32,21 @@ const ProductCard = ({
 const router=useRouter()
 
   const items: MenuProps["items"] = [
+   
     {
       key: "1",
-      label: <p className="text-base">Logs</p>,
-      icon: <TbLogs className="!text-base" />,
-      onClick: () => router.push(`/products/logs/${id}`),
-    },
-    {
-      key: "2",
       label: <p className="text-base">Delete</p>,
       icon: <MdDelete className="!text-base text-red-500" />,
       onClick: () => handleShowDeleteConfirmation(),
     },
     {
-      key: "3",
+      key: "2",
       label: <p className="text-base">Update</p>,
       icon: <MdEdit className="!text-base text-blue-600" />,
       onClick: () => handleShowUpdateModal(),
     },
     {
-      key: "4",
+      key: "3",
       label: <p className="text-base">Manage Inventory</p>,
       icon: <MdInventory className="!text-base text-green-700" />,
       onClick: () => handleManageInventory(),

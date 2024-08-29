@@ -18,7 +18,6 @@ const SearchProducts = ({
   setProductsLoader: (value: boolean) => void;
   refetchProducts: (values?: ProductFilterType) => void;
 }) => {
-  const [searchedTerm, setSearchedTerm] = useState<string>("");
   const [activeFilter, setActiveFilter] = useState<ProductFilterType | null>(
     null
   );
@@ -89,32 +88,17 @@ const SearchProducts = ({
   return (
     <div className="flex justify-end">
       <div className="min-w-[25%] flex space-x-2">
-        <Form
-          name="basic"
-          initialValues={{ quantity: 1 }}
-          onFinish={() => {}}
-          onFinishFailed={(error) =>
-            console.log(error, "error on submit form!")
-          }
-          autoComplete="off"
-        >
-          <Form.Item
-            name="Search"
-            rules={[{ min: 3, message: "Minimum 3 letters required!" }]}
-          >
-            <Input
-              size="large"
-              onChange={(e) => {
-                setActiveFilter(null);
-                // setSearchedTerm(e.target.value);
-                if (e.target.value.length > 2) searchProduct(e.target.value);
-                else if (!e.target.value) refetchProducts();
-              }}
-              placeholder="Search here..."
-              prefix={<MdSearch className="text-xl" />}
-            />
-          </Form.Item>
-        </Form>
+        <Input
+          size="large"
+          onChange={(e) => {
+            if (!e.target.value) refetchProducts();
+            else searchProduct(e.target.value);
+            setActiveFilter(null);
+          }}
+          placeholder="Search here..."
+          prefix={<MdSearch className="text-xl" />}
+        />
+
         <Dropdown
           trigger={["click"]}
           menu={{

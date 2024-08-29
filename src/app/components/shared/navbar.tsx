@@ -10,6 +10,7 @@ const Navbar = () => {
   const navItems = [
     { title: "Home", key: "/" },
     { title: "Products", key: "/products" },
+    { title: "Logs", key: "/logs" },
   ];
 
   return (
@@ -21,22 +22,24 @@ const Navbar = () => {
               Inventory System
             </p>
           </div>
-          <div>
-            <ul className="flex text-sm font-medium gap-x-6">
-              {navItems.map((item) => (
-                <li
-                  className={
-                    pathname === item.key
-                      ? "underline text-[#1677ff] cursor-pointer"
-                      : ""
-                  }
-                  key={item.key}
-                >
-                  <Link href={item.key}>{item.title}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {pathname !== "/" && (
+            <div>
+              <ul className="flex text-sm font-medium gap-x-6">
+                {navItems.map((item) => (
+                  <li
+                    className={
+                      pathname === item.key
+                        ? "underline text-[#1677ff] cursor-pointer"
+                        : ""
+                    }
+                    key={item.key}
+                  >
+                    <Link href={item.key}>{item.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </Container>
     </div>
