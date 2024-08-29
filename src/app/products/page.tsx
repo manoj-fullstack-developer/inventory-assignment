@@ -22,6 +22,9 @@ import { ProductFilterType } from "../enums/productFilterType";
 
 const Products = () => {
   const [isCreateProduct, setIsCreateProduct] = useState<boolean>(false);
+  const [activeFilter, setActiveFilter] = useState<ProductFilterType | null>(
+    null
+  );
   const [productsList, setProductsList] = useState<IProductsListData[]>([]);
   const [produtsLoader, setProductsLoader] = useState<boolean>(false);
   const [isUpdateProduct, setIsUpdateProduct] = useState<boolean>(false);
@@ -39,6 +42,8 @@ const Products = () => {
 
       if (responseJSON.status === StatusCodes.OK) {
         setProductsList(responseJSON.data);
+        setActiveFilter(null)
+
       } else {
         notification.error({ message: responseJSON.message, type: "error" });
       }
@@ -46,7 +51,7 @@ const Products = () => {
       console.log(error, "error");
     }
     setProductsLoader(false);
-  }, []);
+  }, [setProductsLoader,notification]);
 
   const handleDeleteProduct = async (id: string) => {
     try {
@@ -58,6 +63,7 @@ const Products = () => {
       if (responseJSON.status === StatusCodes.OK) {
         notification.success({ message: "Success!", type: "success" });
         getProductsList();
+
       } else {
         notification.error({ message: responseJSON.message, type: "error" });
       }
@@ -85,6 +91,10 @@ const Products = () => {
         </div>
         <Divider />
         <SearchProducts
+          handleUpdateFilter={(value) =>{ 
+         setActiveFilter(value)
+          }}
+          activeFilter={activeFilter}
           refetchProducts={getProductsList}
           setProductsLoader={setProductsLoader}
           setProductsList={setProductsList}
@@ -101,7 +111,6 @@ const Products = () => {
                 className="sm:col-span-6 lg:col-span-4 col-span-12"
               >
                 <ProductCard
-                  id={product._id}
                   handleSellProduct={() => {
                     setIsSellProduct(true);
                     setTriggeredProduct(product);

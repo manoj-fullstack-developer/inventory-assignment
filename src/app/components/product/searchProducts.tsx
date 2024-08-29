@@ -1,6 +1,6 @@
 import { IProductsListData } from "@/app/interfaces/response/productsList.response";
 import { Button, Dropdown, Form, Input, MenuProps, notification } from "antd";
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { MdSearch } from "react-icons/md";
 import { debounce } from "lodash";
@@ -13,14 +13,17 @@ const SearchProducts = ({
   setProductsList,
   setProductsLoader,
   refetchProducts,
+  handleUpdateFilter,
+  activeFilter,
 }: {
   setProductsList: (data: IProductsListData[]) => void;
   setProductsLoader: (value: boolean) => void;
+  activeFilter: ProductFilterType | null;
   refetchProducts: (values?: ProductFilterType) => void;
+  handleUpdateFilter: (values: ProductFilterType | null) => void;
 }) => {
-  const [activeFilter, setActiveFilter] = useState<ProductFilterType | null>(
-    null
-  );
+  const [filter, setFilter] = useState<ProductFilterType | null>();
+
   const items: MenuProps["items"] = [
     {
       key: ProductFilterType.STOCKS,
@@ -28,7 +31,7 @@ const SearchProducts = ({
       icon: <RiStockFill className="!text-base text-green-500" />,
       onClick: () => {
         refetchProducts(ProductFilterType.STOCKS);
-        setActiveFilter(ProductFilterType.STOCKS);
+        handleUpdateFilter(ProductFilterType.STOCKS);
       },
     },
     {
@@ -37,7 +40,7 @@ const SearchProducts = ({
       icon: <RiStockFill className="!text-base text-green-500" />,
       onClick: () => {
         refetchProducts(ProductFilterType.A_TO_Z);
-        setActiveFilter(ProductFilterType.A_TO_Z);
+        handleUpdateFilter(ProductFilterType.A_TO_Z);
       },
     },
     {
@@ -46,24 +49,25 @@ const SearchProducts = ({
       icon: <RiStockFill className="!text-base text-green-500" />,
       onClick: () => {
         refetchProducts(ProductFilterType.Z_TO_A);
-        setActiveFilter(ProductFilterType.Z_TO_A);
+        handleUpdateFilter(ProductFilterType.Z_TO_A);
       },
     },
 
-    ...(activeFilter
+    ...(filter
       ? [
           {
             key: "Reset",
             label: <p className="text-base">Reset</p>,
             icon: <RiStockFill className="!text-base text-green-500" />,
             onClick: () => {
-              refetchProducts();
-              setActiveFilter(null);
+             setFilter(null)
+             refetchProducts()
             },
           },
         ]
       : []),
   ];
+
   const searchProduct = debounce(async (value: string) => {
     setProductsLoader(true);
     try {
@@ -84,6 +88,9 @@ const SearchProducts = ({
     }
     setProductsLoader(false);
   }, 1000);
+  useEffect(() => {
+    if (activeFilter) setFilter(activeFilter);
+  }, [activeFilter]);
 
   return (
     <div className="flex justify-end">
@@ -93,7 +100,7 @@ const SearchProducts = ({
           onChange={(e) => {
             if (!e.target.value) refetchProducts();
             else searchProduct(e.target.value);
-            setActiveFilter(null);
+            handleUpdateFilter(null);
           }}
           placeholder="Search here..."
           prefix={<MdSearch className="text-xl" />}
@@ -103,7 +110,7 @@ const SearchProducts = ({
           trigger={["click"]}
           menu={{
             items: items.map((item) => {
-              if (item?.key === activeFilter)
+              if (item && item?.key === filter)
                 item.className = "!bg-[#1677ff] !text-[white]";
               return item;
             }),
@@ -111,7 +118,7 @@ const SearchProducts = ({
           placement="bottomLeft"
         >
           <Button
-            className={`${activeFilter && "!bg-[#1677ff] !text-white"} `}
+            className={`${filter && "!bg-[#1677ff] !text-white"} `}
             size="large"
             icon={<CiFilter className={"mx-6"} />}
           />

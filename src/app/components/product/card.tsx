@@ -1,10 +1,8 @@
 import { Button, Card, Dropdown, MenuProps, Tooltip } from "antd";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React from "react";
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { MdDelete, MdEdit, MdInventory } from "react-icons/md";
-import { TbLogs } from "react-icons/tb";
 
 type ProductCardProps = {
   name: string;
@@ -15,7 +13,6 @@ type ProductCardProps = {
   handleShowUpdateModal: () => void;
   handleManageInventory: () => void;
   handleSellProduct: () => void;
-  id:string
 };
 
 const ProductCard = ({
@@ -23,13 +20,11 @@ const ProductCard = ({
   stock,
   name,
   price,
-  id,
   handleShowDeleteConfirmation,
   handleShowUpdateModal,
   handleSellProduct,
   handleManageInventory,
 }: ProductCardProps) => {
-const router=useRouter()
 
   const items: MenuProps["items"] = [
    
