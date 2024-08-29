@@ -10,7 +10,7 @@ const Navbar = () => {
   const navItems = [
     { title: "Home", key: "/" },
     { title: "Products", key: "/products" },
-    { title: "Logs", key: "/all-logs" },
+    { title: "Logs", key: "/inventory-logs" },
   ];
 
   return (

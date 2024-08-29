@@ -80,7 +80,7 @@ const ProductLogs = () => {
     <Container>
       <div className="mb-6">
         <div className="flex justify-between">
-          <h1 className="text-xl font-medium">Logs</h1>
+          <h1 className="text-xl font-medium">Inventory Logs</h1>
         </div>
         <Divider />
         <br />
