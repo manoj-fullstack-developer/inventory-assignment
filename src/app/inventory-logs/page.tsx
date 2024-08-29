@@ -1,7 +1,6 @@
 'use client';
 import Container from '@/app/components/shared/container';
 import { InventorySubmitType } from '@/app/enums/inventorySubmitType';
-import { IBaseResponse } from '@/app/interfaces/response/baseResponse';
 import {
     IProductLogsData,
     IProductLogsResponse,
@@ -19,13 +18,13 @@ const ProductLogs = () => {
             title: 'Product name',
             dataIndex: 'name',
             key: 'name',
-            render: (row: any, data: IProductLogsData) => <p>{data.productId.name}</p>,
+            render: (_: any, data: IProductLogsData) => <p>{data.productId.name}</p>,
         },
         {
             title: 'Type',
             dataIndex: 'type',
             key: 'type',
-            render: (row: any, { type, _id }: IProductLogsData) => {
+            render: (_: any, { type, _id }: IProductLogsData) => {
                 let color = 'green';
                 if (type === InventorySubmitType.SUBTRACT) color = 'red';
                 return (
@@ -39,7 +38,7 @@ const ProductLogs = () => {
             title: 'Price',
             dataIndex: 'price',
             key: 'price',
-            render: (row: any, data: IProductLogsData) => <p>{`$${data.productId.price}`}</p>,
+            render: (_: any, data: IProductLogsData) => <p>{`$${data.productId.price}`}</p>,
         },
         {
             title: 'Stocks Count',
@@ -55,14 +54,22 @@ const ProductLogs = () => {
 
     const getProductLogs = async () => {
         setLogsLoading(true);
+
         try {
-            let response = await fetch(`/api/all-logs`);
-            let responseJSON: IProductLogsResponse = await response.json();
-            if (responseJSON.status === StatusCodes.OK) setLogsList(responseJSON.data);
-            else notification.error({ message: responseJSON.message, type: 'error' });
+            const response = await fetch(`/api/all-logs`, {
+                cache: 'no-store',
+            });
+            const responseJSON: IProductLogsResponse = await response.json();
+
+            if (responseJSON.status === StatusCodes.OK) {
+                setLogsList(responseJSON.data);
+            } else {
+                notification.error({ message: responseJSON.message, type: 'error' });
+            }
         } catch (error) {
             console.log(error, 'error');
         }
+
         setLogsLoading(false);
     };
 
