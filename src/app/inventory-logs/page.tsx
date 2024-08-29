@@ -61,7 +61,7 @@ const ProductLogs = () => {
   const getProductLogs = async () => {
     setLogsLoading(true);
     try {
-      let response = await fetch(`/api/logs`);
+      let response = await fetch(`/api/all-logs`);
       let responseJSON: IProductLogsResponse = await response.json();
       if (responseJSON.status === StatusCodes.OK)
         setLogsList(responseJSON.data);
