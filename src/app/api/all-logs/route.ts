@@ -3,11 +3,10 @@ import LogModel from '@/app/models/log';
 import { StatusCodes } from 'http-status-codes';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
+export async function GET() {
     try {
         await connectDb();
-
-        let data = await LogModel.find({}).populate('productId');
+       let data = await LogModel.find({}).populate('productId');
         return NextResponse.json({ success: true, status: StatusCodes.OK, data });
     } catch (error) {
         console.log(error, 'eroor');
