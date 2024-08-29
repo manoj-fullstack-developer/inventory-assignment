@@ -10,7 +10,7 @@ const Container = ({
   return (
     <div className="flex justify-center">
       <div
-        className={`max-w-[1300px] lg:mx-20 w-full  sm:max-w-[90%] max-sm:px-6 ${className} sunset-font `}
+        className={`xl:max-w-[1300px] lg:mx-20 w-full  sm:max-w-[90%] max-sm:px-6 ${className} sunset-font `}
       >
         {children}
       </div>
