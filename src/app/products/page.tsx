@@ -1,6 +1,6 @@
 "use client";
 import React, { useCallback, useEffect, useState } from "react";
-import Container from "../components/container";
+import Container from "../components/shared/container";
 import { Button, Divider, notification } from "antd";
 import { FaPlus } from "react-icons/fa";
 import CreateProductModal from "../components/product/createProduct.modal";

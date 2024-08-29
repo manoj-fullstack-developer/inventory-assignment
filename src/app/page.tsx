@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "antd";
 import Link from "next/link";
-import Container from "./components/container";
+import Container from "./components/shared/container";
 
 export default function Home() {
   return (
