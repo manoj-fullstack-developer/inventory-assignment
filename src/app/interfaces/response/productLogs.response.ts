@@ -1,20 +1,19 @@
-import { IBaseResponse } from "./baseResponse";
+import { IBaseResponse } from './baseResponse';
 
 export interface IProductLogsResponse extends IBaseResponse {
-  data: IProductLogsData[];
+    data: IProductLogsData[];
 }
 
 export interface IProductLogsData {
-  _id: string;
-  type: string;
-  count: number;
-  totalStockCount: number;
-  productId: ProductId;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
+    _id: string;
+    type: string;
+    count: number;
+    totalStockCount: number;
+    productId: ProductId;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 }
-
 
 export interface ProductId {
     _id: string;
@@ -25,4 +24,4 @@ export interface ProductId {
     createdAt: string;
     updatedAt: string;
     __v: number;
-  }
+}

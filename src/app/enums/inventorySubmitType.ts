@@ -1,4 +1,4 @@
 export enum InventorySubmitType {
-    ADD='add',
-    SUBTRACT='subtract'
+    ADD = 'add',
+    SUBTRACT = 'subtract',
 }

@@ -3,26 +3,26 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Medusa Regular';
-  src: url('./fonts/medusa.otf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Medusa Regular';
+    src: url('./fonts/medusa.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 @font-face {
-  font-family: 'Sunset Regular';
-  src: url('./fonts/sunset.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'Sunset Regular';
+    src: url('./fonts/sunset.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 body {
-  background-color: #f5f6fa;
+    background-color: #f5f6fa;
 }
 .sunset-font {
-  font-family: 'Sunset Regular', sans-serif !important;
+    font-family: 'Sunset Regular', sans-serif !important;
 }
 .medusa-font {
-  font-family: 'Medusa Regular', sans-serif !important;
+    font-family: 'Medusa Regular', sans-serif !important;
 }
 
 .ant-modal,
@@ -39,5 +39,5 @@ body {
 .ant-menu,
 .ant-btn,
 .ant-menu-item {
-  font-family: 'Sunset Regular', sans-serif !important;
+    font-family: 'Sunset Regular', sans-serif !important;
 }

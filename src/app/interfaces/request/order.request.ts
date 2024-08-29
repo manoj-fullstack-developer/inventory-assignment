@@ -1,5 +1,5 @@
 export interface ICreateOrderRequestPayload {
-    email:string;
-    quantity:number;
-    productId:string
+    email: string;
+    quantity: number;
+    productId: string;
 }

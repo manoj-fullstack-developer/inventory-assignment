@@ -1,6 +1,4 @@
-
-
-  export interface ILogRequestPayload {
+export interface ILogRequestPayload {
     orderId?: string;
     type: string;
     stock: number;

@@ -1,4 +1,4 @@
 export enum FormType {
-    ADD='add',
-    UPDATE='update'
+    ADD = 'add',
+    UPDATE = 'update',
 }
