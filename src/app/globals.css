@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Medusa Regular';
+  src: url('./fonts/medusa.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sunset Regular';
+  src: url('./fonts/sunset.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background-color: #f5f6fa;
+}
+.sunset-font {
+  font-family: 'Sunset Regular', sans-serif !important;
+}
+.medusa-font {
+  font-family: 'Medusa Regular', sans-serif !important;
+}
+
+.ant-modal,
+.ant-modal-content,
+.ant-btn,
+.ant-form,
+.ant-table,
+.ant-typography,
+.ant-dropdown,
+.ant-dropdown-menu,
+.ant-select,
+.ant-select-selector,
+.ant-select-selection-item,
+.ant-menu,
+.ant-btn,
+.ant-menu-item {
+  font-family: 'Sunset Regular', sans-serif !important;
+}
