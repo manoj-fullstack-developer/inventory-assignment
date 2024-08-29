@@ -8,7 +8,6 @@ import {
 } from "@/app/interfaces/response/productLogs.response";
 import { Divider, Table, Tag, notification } from "antd";
 import { StatusCodes } from "http-status-codes";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 const ProductLogs = () => {
@@ -43,7 +42,7 @@ const ProductLogs = () => {
       dataIndex: "price",
       key: "price",
       render: (row: any, data: IProductLogsData) => (
-        <p>{`${data.productId.price}$`}</p>
+        <p>{`$${data.productId.price}`}</p>
       ),
     },
     {
@@ -52,7 +51,7 @@ const ProductLogs = () => {
       key: "count",
     },
     {
-      title: "Total Stocks Available",
+      title: "Total In Stock",
       dataIndex: "totalStockCount",
       key: "totalStockCount",
     },
