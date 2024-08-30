@@ -33,6 +33,7 @@ const Products = () => {
     const getProductsList = useCallback(
         async (value?: ProductFilterType) => {
             setProductsLoader(true);
+
             try {
                 let response = await fetch(
                     !value ? 'api/products' : `api/products?filterType=${value}`
@@ -48,6 +49,7 @@ const Products = () => {
             } catch (error) {
                 console.log(error, 'error');
             }
+
             setProductsLoader(false);
         },
         [setProductsLoader, notification]

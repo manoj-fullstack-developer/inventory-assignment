@@ -88,6 +88,7 @@ const SearchProducts = ({
         }
         setProductsLoader(false);
     }, 1000);
+    
     useEffect(() => {
         if (activeFilter) setFilter(activeFilter);
     }, [activeFilter]);

@@ -25,6 +25,7 @@ const CreateProductModal = ({
             let response = await fetch('api/products', {
                 method: 'POST',
                 body: JSON.stringify(values),
+
             });
             let responseJSON: IBaseResponse = await response.json();
 
@@ -32,7 +33,9 @@ const CreateProductModal = ({
                 notification.success({ message: 'Success!', type: 'success' });
                 refetchProducts();
                 setIsShowModal(false);
-            } else notification.error({ message: responseJSON.message, type: 'error' });
+            } else {
+                notification.error({ message: responseJSON.message, type: 'error' });
+            }
         } catch (error) {
             console.log(error, 'error');
         }

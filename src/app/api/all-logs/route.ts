@@ -3,16 +3,17 @@ import LogModel from '@/app/models/log';
 import { StatusCodes } from 'http-status-codes';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
 export async function GET() {
     try {
         await connectDb();
-       let data = await LogModel.find({}).populate('productId');
+        const data = await LogModel.find({}).populate('productId');
+
         return NextResponse.json({ success: true, status: StatusCodes.OK, data });
     } catch (error) {
-        console.log(error, 'eroor');
         return NextResponse.json({
             success: false,
-            message: 'Failed to create item',
+            message: 'Failed to get all logs',
             status: StatusCodes.INTERNAL_SERVER_ERROR,
         });
     }

@@ -9,12 +9,12 @@ export async function GET(request: Request) {
     try {
         await connectDb();
         const url = new URL(request.url);
-        let filterType = url.searchParams.get('filterType');
+        const filterType = url.searchParams.get('filterType');
         let query = {};
         const collation = { locale: 'en', strength: 2 };
 
         if (filterType === ProductFilterType.STOCKS) query = { stock: { $gt: 0, $exists: true } };
-        let items = await ProductModel.find({ ...query })
+        const items = await ProductModel.find({ ...query })
             .collation(collation)
             .sort(
                 filterType === ProductFilterType.A_TO_Z
@@ -23,13 +23,14 @@ export async function GET(request: Request) {
                       ? { name: -1 }
                       : { createdAt: -1 }
             );
+
         return NextResponse.json({
             data: items,
             success: true,
             status: StatusCodes.OK,
         });
     } catch (error) {
-        console.log(error, 'error');
+
         return NextResponse.json({
             success: false,
             message: 'Failed to fetch items',
@@ -43,7 +44,7 @@ export async function POST(request: Request) {
         await connectDb();
         const body: IProductRequestPayload = await request.json();
         const { name } = body;
-        let foundProduct = await ProductModel.findOne({
+        const foundProduct = await ProductModel.findOne({
             name: { $regex: name, $options: 'i' },
         });
         if (foundProduct)
@@ -72,7 +73,7 @@ export async function PUT(request: Request) {
         const body: IProductRequestPayload = await request.json();
         const { name, productId } = body;
 
-        let foundProduct = await ProductModel.findById(productId);
+        const foundProduct = await ProductModel.findById(productId);
         if (!foundProduct) {
             return NextResponse.json({
                 success: false,
@@ -96,8 +97,8 @@ export async function PUT(request: Request) {
 
         return NextResponse.json({ success: true, status: StatusCodes.OK });
     } catch (error) {
-        console.log(error, 'eroor');
-        return NextResponse.json({
+
+      return NextResponse.json({
             success: false,
             message: 'Failed to update item',
             status: StatusCodes.INTERNAL_SERVER_ERROR,
@@ -115,7 +116,7 @@ export async function DELETE(request: Request) {
 
         return NextResponse.json({ success: true, status: StatusCodes.OK });
     } catch (error) {
-        console.log(error, 'eroor');
+
         return NextResponse.json({
             success: false,
             message: 'Failed to delete item',

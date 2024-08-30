@@ -39,7 +39,10 @@ const ManageInventoryModal = ({
                     notification.success({ message: 'Success!', type: 'success' });
                     refetchProducts();
                     setIsShowModal(false);
-                } else notification.error({ message: responseJSON.message, type: 'error' });
+                    
+                } else {
+                    notification.error({ message: responseJSON.message, type: 'error' });
+                }
             }
         } catch (error) {
             console.log(error, 'error');

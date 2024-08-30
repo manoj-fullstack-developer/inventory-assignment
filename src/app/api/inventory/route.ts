@@ -6,11 +6,12 @@ import { StatusCodes } from 'http-status-codes';
 import { NextResponse } from 'next/server';
 
 export async function PUT(request: Request) {
+    
     try {
         await connectDb();
         const body = await request.json();
-        let { stock, productId, type } = body;
-        let foundProduct = await ProductModel.findById(productId);
+        const { stock, productId, type } = body;
+        const foundProduct = await ProductModel.findById(productId);
         if (!foundProduct) {
             return NextResponse.json({
                 success: false,
@@ -25,7 +26,7 @@ export async function PUT(request: Request) {
             modifyStocks = foundProduct.stock - stock;
         }
 
-        let updatedProductDoc = await ProductModel.findByIdAndUpdate(
+        const updatedProductDoc = await ProductModel.findByIdAndUpdate(
             foundProduct._id,
             { $set: { stock: modifyStocks } },
             { new: true }
@@ -41,11 +42,12 @@ export async function PUT(request: Request) {
 
         return NextResponse.json({ success: true, status: StatusCodes.OK });
     } catch (error) {
-        console.log(error, 'eroor');
+        
         return NextResponse.json({
             success: false,
             message: 'Failed to update item',
             status: StatusCodes.INTERNAL_SERVER_ERROR,
         });
     }
+
 }

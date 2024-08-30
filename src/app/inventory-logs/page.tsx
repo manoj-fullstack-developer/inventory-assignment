@@ -1,4 +1,6 @@
 'use client';
+export const fetchCache = 'force-no-store';
+
 import Container from '@/app/components/shared/container';
 import { InventorySubmitType } from '@/app/enums/inventorySubmitType';
 import {
@@ -56,9 +58,7 @@ const ProductLogs = () => {
         setLogsLoading(true);
 
         try {
-            const response = await fetch(`/api/all-logs`, {
-                cache: 'no-store',
-            });
+            const response = await fetch(`/api/all-logs`);
             const responseJSON: IProductLogsResponse = await response.json();
 
             if (responseJSON.status === StatusCodes.OK) {
