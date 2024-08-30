@@ -1,11 +1,6 @@
-
-# Inventory management system 
+# Inventory management system
 
 A simple and efficient inventory tracking app built with Next.js and TypeScript, designed to help users manage products and inventory levels. The app features CRUD operations for products, inventory management updates, order creation, and a comprehensive log page to track all inventory changes.
-
-
-
-
 
 ## Tech Stack
 
@@ -16,10 +11,6 @@ A simple and efficient inventory tracking app built with Next.js and TypeScript,
 **Database:** MongoDB
 
 **Deployment:** Vercel
-
-
-
-
 
 # Features
 
@@ -52,7 +43,6 @@ Inventory Logs:
 
 Detailed Logs Page: Displays a comprehensive history of all inventory changes, including product stock
 
-
 ## Run Locally
 
 Clone the project
@@ -73,7 +63,6 @@ Start the server
   npm run dev
 ```
 
-
 ## API Reference
 
 #### Get Products List
@@ -82,22 +71,18 @@ Start the server
   GET /api/products
 ```
 
-
 #### Create Product
 
 ```http
   POST /api/products
 ```
 
-| Body | Type     | 
-| :-------- | :------- | 
-| `name`      | `string` 
-| `description`      | `string` 
-| `price`      | `number` 
-| `stock`      | `number` 
-
-
-
+| Body          | Type     |
+| :------------ | :------- |
+| `name`        | `string` |
+| `description` | `string` |
+| `price`       | `number` |
+| `stock`       | `number` |
 
 #### Update Product
 
@@ -105,10 +90,9 @@ Start the server
   PUT /api/products
 ```
 
-| Body | Type     | 
-| :-------- | :------- | 
-| `productId`      | `string` 
-
+| Body        | Type     |
+| :---------- | :------- |
+| `productId` | `string` |
 
 #### Delete Product
 
@@ -116,10 +100,9 @@ Start the server
   DELETE /api/products
 ```
 
-| Query Param | Type     | 
-| :-------- | :------- | 
-| `productId`      | `string` 
-
+| Query Param | Type     |
+| :---------- | :------- |
+| `productId` | `string` |
 
 #### Search Product
 
@@ -127,9 +110,9 @@ Start the server
   POST /api/products/search
 ```
 
-| Body | Type     | 
-| :-------- | :------- | 
-| `name`      | `string` 
+| Body   | Type     |
+| :----- | :------- |
+| `name` | `string` |
 
 #### Inventory Logs
 
@@ -137,32 +120,30 @@ Start the server
   GET /api/all-logs
 ```
 
- 
 #### Update Inventory
 
 ```http
   PUT /api/inventory
 ```
 
-| Body | Type     | 
-| :-------- | :------- | 
-| `productId`      | `string` 
-| `stock`      | `number` 
-| `type`      | `add or subtract` 
+| Body        | Type              |
+| :---------- | :---------------- |
+| `productId` | `string`          |
+| `stock`     | `number`          |
+| `type`      | `add or subtract` |
 
-
- 
 #### Create Order
 
 ```http
   POST /api/order
 ```
 
-| Body | Type     | 
-| :-------- | :------- | 
-| `productId`      | `string` 
-| `stock`      | `number` 
-| `type`      | `string` 
+| Body        | Type     |
+| :---------- | :------- |
+| `productId` | `string` |
+| `stock`     | `number` |
+| `type`      | `string` |
 
 ## 🚀 About Me
+
 Full Stack Developer with over 12 years of experience in JavaScript, React, Node.js, Redux, .NET, C#, and TypeScript. I have led the development of numerous research projects and have built applications handling millions of users. My strong logical and technical skills, combined with my ability to quickly adapt to new technologies, enable me to tackle complex problems efficiently. I am seeking a full-time role where I can confront new challenges and utilize my interpersonal skills, time management, and problem-solving abilities. I am committed to achieving ambitious development goals on tight schedules, delivering high-quality code, and managing multiple projects with precision and attention to detail.

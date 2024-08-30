@@ -35,10 +35,10 @@ const Products = () => {
             setProductsLoader(true);
 
             try {
-                let response = await fetch(
+                const response = await fetch(
                     !value ? 'api/products' : `api/products?filterType=${value}`
                 );
-                let responseJSON: IProductsListResponse = await response.json();
+                const responseJSON: IProductsListResponse = await response.json();
 
                 if (responseJSON.status === StatusCodes.OK) {
                     setProductsList(responseJSON.data);
@@ -57,13 +57,15 @@ const Products = () => {
 
     const handleDeleteProduct = async (id: string) => {
         try {
-            let response = await fetch('api/products', {
+            const response = await fetch('api/products', {
                 method: 'DELETE',
                 body: JSON.stringify({ productId: id }),
             });
-            let responseJSON: IBaseResponse = await response.json();
+            const responseJSON: IBaseResponse = await response.json();
+
             if (responseJSON.status === StatusCodes.OK) {
                 notification.success({ message: 'Success!', type: 'success' });
+
                 getProductsList();
             } else {
                 notification.error({ message: responseJSON.message, type: 'error' });
@@ -101,7 +103,6 @@ const Products = () => {
                     setProductsList={setProductsList}
                 />
                 <br />
-
                 {produtsLoader ? (
                     <Loader />
                 ) : productsList?.length > 0 ? (
@@ -145,7 +146,6 @@ const Products = () => {
                     </div>
                 )}
             </div>
-
             {isCreateProduct && (
                 <CreateProductModal
                     refetchProducts={getProductsList}
@@ -153,7 +153,6 @@ const Products = () => {
                     setIsShowModal={setIsCreateProduct}
                 />
             )}
-
             {isUpdateProduct && triggeredProduct && (
                 <UpdateProductModal
                     refetchProducts={getProductsList}
@@ -162,7 +161,6 @@ const Products = () => {
                     initialProduct={triggeredProduct}
                 />
             )}
-
             {isManageInventory && triggeredProduct && (
                 <ManageInventoryModal
                     refetchProducts={getProductsList}
@@ -171,7 +169,6 @@ const Products = () => {
                     setIsShowModal={setIsManageInventory}
                 />
             )}
-
             {isSellProduct && triggeredProduct && (
                 <SellProductModal
                     refetchProducts={getProductsList}

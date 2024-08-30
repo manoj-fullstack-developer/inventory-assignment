@@ -1,6 +1,4 @@
 'use client';
-export const fetchCache = 'force-no-store';
-
 import Container from '@/app/components/shared/container';
 import { InventorySubmitType } from '@/app/enums/inventorySubmitType';
 import {
@@ -13,7 +11,7 @@ import React, { useEffect, useState } from 'react';
 
 const ProductLogs = () => {
     const [logsList, setLogsList] = useState<IProductLogsData[]>([]);
-    const [logsLoading, setLogsLoading] = useState<boolean>(false);
+    const [logsLoading, setLogsLoading] = useState<boolean>(true);
 
     const columns = [
         {
@@ -62,12 +60,12 @@ const ProductLogs = () => {
             const responseJSON: IProductLogsResponse = await response.json();
 
             if (responseJSON.status === StatusCodes.OK) {
-                setLogsList(responseJSON.data);
+                setLogsList(responseJSON.data.map((log) => ({ ...log, key: log._id })));
             } else {
                 notification.error({ message: responseJSON.message, type: 'error' });
             }
         } catch (error) {
-            console.log(error, 'error');
+            console.log(error, 'error in getProductLogs');
         }
 
         setLogsLoading(false);

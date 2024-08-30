@@ -25,21 +25,25 @@ const UpdateProductModal = ({
 
     const handleUpdateProduct = async (values: IProductRequestPayload) => {
         setUpdateProductLoading(true);
+
         try {
-            let response = await fetch('api/products', {
+            const response = await fetch('api/products', {
                 method: 'PUT',
                 body: JSON.stringify({ ...values, productId: initialProduct._id }),
             });
-            let responseJSON: IBaseResponse = await response.json();
+            const responseJSON: IBaseResponse = await response.json();
 
             if (responseJSON.status === StatusCodes.OK) {
                 notification.success({ message: 'Success!', type: 'success' });
                 refetchProducts();
                 setIsShowModal(false);
-            } else notification.error({ message: responseJSON.message, type: 'error' });
+            } else {
+                notification.error({ message: responseJSON.message, type: 'error' });
+            }
         } catch (error) {
             console.log(error, 'error');
         }
+
         setUpdateProductLoading(false);
     };
 

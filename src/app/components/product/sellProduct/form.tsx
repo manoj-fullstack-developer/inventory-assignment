@@ -1,7 +1,6 @@
 import { ICreateOrderRequestPayload } from '@/app/interfaces/request/order.request';
 import { IProductsListData } from '@/app/interfaces/response/productsList.response';
 import { Button, Form, Input } from 'antd';
-import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';
 
 const SellProductForm = ({
@@ -33,9 +32,15 @@ const SellProductForm = ({
                 <label>Email</label>
                 <Form.Item
                     name="email"
-                    rules={[{ required: true, message: 'Please input your Email!' }]}
+                    rules={[
+                        { required: true, message: 'Please input your Email!' },
+                        {
+                            type: 'email',
+                            message: 'Please enter a valid Email!',
+                        },
+                    ]}
                 >
-                    <Input size="large" />
+                    <Input size="large" inputMode="email" itemType="email" />
                 </Form.Item>
                 <label>Quantity</label>
                 <Form.Item

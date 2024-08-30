@@ -21,16 +21,17 @@ const CreateProductModal = ({
 
     const handleCreateProduct = async (values: IProductRequestPayload) => {
         setCreateProductLoading(true);
+
         try {
-            let response = await fetch('api/products', {
+            const response = await fetch('api/products', {
                 method: 'POST',
                 body: JSON.stringify(values),
-
             });
-            let responseJSON: IBaseResponse = await response.json();
+            const responseJSON: IBaseResponse = await response.json();
 
             if (responseJSON.status === StatusCodes.OK) {
                 notification.success({ message: 'Success!', type: 'success' });
+
                 refetchProducts();
                 setIsShowModal(false);
             } else {
@@ -38,8 +39,9 @@ const CreateProductModal = ({
             }
         } catch (error) {
             console.log(error, 'error');
+        } finally {
+            setCreateProductLoading(false);
         }
-        setCreateProductLoading(false);
     };
 
     return (

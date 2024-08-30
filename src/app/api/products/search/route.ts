@@ -4,12 +4,13 @@ import { StatusCodes } from 'http-status-codes';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
-
     try {
         await connectDb();
+
         const body = await request.json();
         const { name } = body;
-        let items = await ProductModel.find({
+
+        const items = await ProductModel.find({
             name: { $regex: name, $options: 'i' },
         }).sort({ createdAt: -1 });
 
@@ -19,12 +20,10 @@ export async function POST(request: NextRequest) {
             status: StatusCodes.OK,
         });
     } catch (error) {
-        
         return NextResponse.json({
             success: false,
             message: 'Failed to fetch items',
             status: StatusCodes.INTERNAL_SERVER_ERROR,
         });
     }
-
 }

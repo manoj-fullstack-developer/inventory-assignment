@@ -52,7 +52,6 @@ const SearchProducts = ({
                 handleUpdateFilter(ProductFilterType.Z_TO_A);
             },
         },
-
         ...(filter
             ? [
                   {
@@ -70,13 +69,14 @@ const SearchProducts = ({
 
     const searchProduct = debounce(async (value: string) => {
         setProductsLoader(true);
+
         try {
-            let response = await fetch('/api/products/search', {
+            const response = await fetch('/api/products/search', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name: value }),
             });
-            let responseJSON: IBaseResponse = await response.json();
+            const responseJSON: IBaseResponse = await response.json();
 
             if (responseJSON.status === StatusCodes.OK) {
                 setProductsList(responseJSON.data);
@@ -86,11 +86,14 @@ const SearchProducts = ({
         } catch (error) {
             console.log(error, 'error');
         }
+
         setProductsLoader(false);
     }, 1000);
-    
+
     useEffect(() => {
-        if (activeFilter) setFilter(activeFilter);
+        if (activeFilter) {
+            setFilter(activeFilter);
+        }
     }, [activeFilter]);
 
     return (
@@ -106,7 +109,6 @@ const SearchProducts = ({
                     placeholder="Search here..."
                     prefix={<MdSearch className="text-xl" />}
                 />
-
                 <Dropdown
                     trigger={['click']}
                     menu={{

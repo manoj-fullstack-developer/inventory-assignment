@@ -31,7 +31,6 @@ const ProductForm = ({
                 <Input size="large" />
             </Form.Item>
             <label>Description</label>
-
             <Form.Item
                 name="description"
                 rules={[{ required: true, message: 'Please input your Description!' }]}
@@ -39,29 +38,15 @@ const ProductForm = ({
                 <TextArea rows={6} />
             </Form.Item>
             <label>Price</label>
-
             <Form.Item
                 name="price"
-                rules={[
-                    { required: true, message: 'Please input your Price!' },
-                    {
-                        validator: (_, value) => {
-                            if (value && value <= 0) {
-                                return Promise.reject(
-                                    new Error('Price must be at greater than 0!')
-                                );
-                            }
-                            return Promise.resolve();
-                        },
-                    },
-                ]}
+                rules={[{ required: true, message: 'Please input your Price!' }]}
             >
-                <Input type="number" size="large" />
+                <Input type="number" size="large" min={1} inputMode="numeric" />
             </Form.Item>
             {(!formType || (formType && formType !== FormType.UPDATE)) && (
                 <>
                     <label>Stock</label>
-
                     <Form.Item
                         name="stock"
                         rules={[

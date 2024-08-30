@@ -7,9 +7,9 @@ import { StatusCodes } from 'http-status-codes';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-
     try {
         await connectDb();
+
         const body = await request.json();
         const { email, quantity, productId } = body;
         const foundProduct = await ProductModel.findById(productId);
@@ -31,6 +31,7 @@ export async function POST(request: Request) {
             { new: true }
         );
         const orderDoc = await OrderModel.create({ email, quantity, productId });
+
         await LogModel.create({
             type: InventorySubmitType.SUBTRACT,
             count: quantity,
@@ -41,12 +42,10 @@ export async function POST(request: Request) {
 
         return NextResponse.json({ success: true, status: StatusCodes.OK });
     } catch (error) {
-        
         return NextResponse.json({
             success: false,
             message: 'Failed to create order',
             status: StatusCodes.INTERNAL_SERVER_ERROR,
         });
     }
-
 }

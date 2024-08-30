@@ -28,26 +28,28 @@ const ManageInventoryModal = ({
     const updateInventory = async (type: InventorySubmitType) => {
         try {
             setIsUpdateInventoryLoading({ type, loading: true });
+
             if (stocks) {
-                let response = await fetch('api/inventory', {
+                const response = await fetch('api/inventory', {
                     method: 'PUT',
                     body: JSON.stringify({ productId: product._id, stock: stocks, type }),
                 });
-                let responseJSON: IBaseResponse = await response.json();
+                const responseJSON: IBaseResponse = await response.json();
 
                 if (responseJSON.status === StatusCodes.OK) {
                     notification.success({ message: 'Success!', type: 'success' });
+
                     refetchProducts();
                     setIsShowModal(false);
-                    
                 } else {
                     notification.error({ message: responseJSON.message, type: 'error' });
                 }
             }
         } catch (error) {
             console.log(error, 'error');
+        } finally {
+            setIsUpdateInventoryLoading({ type, loading: false });
         }
-        setIsUpdateInventoryLoading({ type, loading: false });
     };
 
     return (
@@ -60,8 +62,13 @@ const ManageInventoryModal = ({
             onClose={() => setIsShowModal(false)}
         >
             <Divider />
-
-            <Input onChange={(e) => setStocks(Number(e.target.value))} type="number" size="large" />
+            <Input
+                onChange={(e) => setStocks(Number(e.target.value))}
+                type="number"
+                size="large"
+                min={1}
+                inputMode="numeric"
+            />
             <div className="flex gap-4 mt-6">
                 <Button
                     loading={
@@ -73,12 +80,11 @@ const ManageInventoryModal = ({
                     disabled={!stocks || product.stock < stocks}
                     icon={<FaMinus />}
                     type="primary"
-                    className="w-full !bg-red-500"
+                    className="w-full !bg-red-500 disabled:text-zinc-400"
                     size="large"
                 >
                     Subtract
                 </Button>
-
                 <Button
                     loading={
                         isUpdateInventoryLoading &&
@@ -89,7 +95,7 @@ const ManageInventoryModal = ({
                     disabled={!stocks || stocks > 200}
                     icon={<FaPlus />}
                     type="primary"
-                    className="w-full !bg-blue-800"
+                    className="w-full !bg-blue-800  disabled:text-zinc-400"
                     size="large"
                 >
                     Add

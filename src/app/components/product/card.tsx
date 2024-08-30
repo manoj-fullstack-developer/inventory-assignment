@@ -63,7 +63,6 @@ const ProductCard = ({
                     <p className="truncate max-w-full">{description}</p>
                 </Tooltip>
                 <p className="mt-2">Price: ${price}</p>
-
                 <div className="flex items-center space-x-3 mb-2 w-full">
                     <Tooltip
                         className="w-full"
@@ -80,7 +79,6 @@ const ProductCard = ({
                             Sell
                         </Button>
                     </Tooltip>
-
                     <Dropdown trigger={['click']} menu={{ items }} placement="topLeft">
                         <Button
                             size="large"

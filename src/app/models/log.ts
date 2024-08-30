@@ -21,5 +21,6 @@ const LogSchema: Schema = new Schema(
     { timestamps: true }
 );
 
-let LogModel = mongoose.models.Log || mongoose.model<ILog>('Log', LogSchema);
+const LogModel = mongoose.models.Log || mongoose.model<ILog>('Log', LogSchema);
+
 export default LogModel;
